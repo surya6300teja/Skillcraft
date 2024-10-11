@@ -5,19 +5,21 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { process } = require('ipaddr.js');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// Routes
+
+
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../Client/dist', 'index.html'));
 });
 
 app.get('/api', (req, res) => {
@@ -25,7 +27,7 @@ app.get('/api', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../Client/dist/', 'index.html'));
 });
 
 const storage = multer.diskStorage({
@@ -58,7 +60,7 @@ app.post('/upload-pdf', upload.single('pdfFile'), async (req, res) => {
     // Delete the uploaded file after processing
     fs.unlinkSync(pdfFilePath);
 
-    const apiKey = 'AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs';
+    const apiKey = "AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs";
     if (!apiKey) {
       throw new Error('API key is missing.');
     }
@@ -105,7 +107,7 @@ app.post('/courses', async (req, res) => {
     const receivedList = req.body.list;
     console.log('Received List:', receivedList);
 
-    const apiKey = 'AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs';
+    const apiKey = "AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs";
     if (!apiKey) {
       throw new Error('API key is missing.');
     }

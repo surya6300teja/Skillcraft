@@ -59,6 +59,8 @@ function CoursesPage() {
         >
           Recommended Courses
         </motion.p>
+        
+        
       </header>
 
       <div className="flex-grow overflow-auto px-4 py-8 relative z-10">
@@ -99,7 +101,19 @@ function CoursesPage() {
               </ul>
             </motion.div>
           ))}
+          
         </div>
+        <div className='text-center py-8 relative z-10'>
+        <motion.p 
+          className="text-0.5xl mt-2 text-purple-200"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+           Note: Some of the course links may not be updated. If a link doesn't work, please search for the course name manually.
+        </motion.p>
+        </div>
+          
       </div>
     </div>
   );
